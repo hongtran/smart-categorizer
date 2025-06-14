@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "smart-categorizer"
+version = "0.1.0"
+description = ""
+authors = ["hong tran <phihong2204@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.115.12"
+uvicorn = "^0.34.3"
+openai = "^1.86.0"
+python-dotenv = {extras = ["cli"], version = "^1.1.0"}
+pydantic = "^2.11.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
