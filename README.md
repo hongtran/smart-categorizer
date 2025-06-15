@@ -78,3 +78,32 @@ Example request:
   ]
 }
 ```
+## Optional Follow-up Discussion
+
+### How would you scale this?
+#### Current Foundation: 
+Caching (lru_cache), Tiered Logic (fallback first), and Smart Batching for LLM calls.
+#### Next Steps:
+- Distributed Cache: Replace lru_cache with Redis for multi-server caching.
+- Message Queue: Use RabbitMQ or SQS for asynchronous processing.
+- Persistent Database: Store all results for analytics.
+
+### How would you deal with new categories?
+#### Current Foundation: 
+The unclear_or_ambiguous category acts as a collection bucket.
+#### Discovery Pipeline:
+- Cluster: Group unclear messages using embeddings.
+- Review: A human reviews the clusters to identify new themes.
+- Promote: Add the new theme as a formal category.
+### When would you consider fine-tuning?
+#### Performance Triggers
+- High LLM Usage: When the fallback categorizer isn't effective enough.
+- Low Accuracy: When the model struggles with key business categories.
+- Cost/Speed: To replace the expensive LLM API with a cheaper, faster custom model at scale.
+### How would you integrate feedback loops?
+#### Mechanism
+- Store Results: Log every classification in a database.
+- Feedback Endpoint: Create an API endpoint (/feedback) to receive corrections.
+- Collect Signals: Gather explicit feedback (user clicks "wrong category") and implicit feedback (agent re-categorizes a ticket).
+#### Purpose
+To create a "ground truth" dataset for monitoring and future fine-tuning.
