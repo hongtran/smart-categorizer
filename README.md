@@ -92,15 +92,17 @@ Caching (lru_cache), Tiered Logic (fallback first), and Smart Batching for LLM c
 #### Current Foundation: 
 The unclear_or_ambiguous category acts as a collection bucket.
 #### Discovery Pipeline:
-- Cluster: Group unclear messages using embeddings.
+- Cluster: Group unclear messages using embeddings model (as sentence-transformers).
 - Review: A human reviews the clusters to identify new themes.
 - Promote: Add the new theme as a formal category.
 ### When would you consider fine-tuning?
+Yes, absolutely. Fine-tuning is the logical next step for optimization. I would use the performance of my current tiered system to decide when to fine-tune.
 #### Performance Triggers
 - High LLM Usage: When the fallback categorizer isn't effective enough.
 - Low Accuracy: When the model struggles with key business categories.
 - Cost/Speed: To replace the expensive LLM API with a cheaper, faster custom model at scale.
 ### How would you integrate feedback loops?
+A feedback loop is critical for turning our classification system from a static tool into a learning system that improves over time
 #### Mechanism
 - Store Results: Log every classification in a database.
 - Feedback Endpoint: Create an API endpoint (/feedback) to receive corrections.
